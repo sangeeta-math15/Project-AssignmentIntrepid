@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "2e39b425-1ee1-4fb6-aa3e-f6161a1d827f",
+		"name": "intrepid",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19281423"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mala\",\n    \"email\": \"mala@gmail.com\",\n    \"password\": \"mala@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"console.log(\"JWT Token:\", data.access);",
+							"",
+							"pm.environment.set(\"jwt_token\", data.access);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    // \"username\": \"overcome@257\",\n    // \"password\": \"Sang@123\"\n    \"username\": \"mala\",\n    \"password\": \"mala@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}auth/login/",
+					"host": [
+						"{{base_url}}auth"
+					],
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTI2NjQ3OSwiaWF0IjoxNzE5MTgwMDc5LCJqdGkiOiJmYTUzMzFkODQ3YjQ0MDE5YTYxYTJlNTllMTQ5NmNkNCIsInVzZXJfaWQiOjF9.hZHQxrw0U-dd0IE378rMs-56E2C1mhg7lBS21rr9MYE\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}auth/logout/",
+					"host": [
+						"{{base_url}}auth"
+					],
+					"path": [
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_hotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 072b9efab179d28b0ac029e0a49842938a02125a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"new hotel\",\n    \"description\": \"A cozy hotel in the heart of Ladakh.\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/hotels/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"hotels",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_hotels",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Taj Hotel \",\n    \"description\": \"A cozy hotel in the heart of Ladakh.\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/hotels/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"hotels",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_hotel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Taj Hotel2\",\n    \"description\": \"A cozy hotel in the heart of Ladakh.\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/hotels/1/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"hotels",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getpackages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/packages/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"packages",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create package",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"new Packagessss\",\n    \"overview\": \"A new package description...\",\n    \"cost\": 999.99,\n    \"hotels\": [1]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/packages/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"packages",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update package",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \" Packagess \",\n    \"overview\": \"A new package description...\",\n    \"cost\": 999.99,\n    \"hotels\": []\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/packages/1/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"packages",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "partial_update",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \n    \"cost\": 999.90\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/packages/1/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"packages",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletepackage",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/packages/3/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"packages",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create images",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/macbook/Downloads/Booking Info.png"
+						},
+						{
+							"key": "package",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}api/images/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"images",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}api/images/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"images",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"package\": 2,\n    \"review_text\": \"Amazing experience!\",\n    \"rating\": 4.5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/reviews/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get review",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}api/reviews/",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
